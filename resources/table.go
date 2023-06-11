@@ -2,25 +2,33 @@ package resources
 
 import (
 	"context"
-	"fmt"
 
-	"github.com/apache/arrow/go/v13/arrow"
+	"github.com/cloudquery/cloudquery/plugins/source/snyk/client"
 	"github.com/cloudquery/plugin-sdk/v3/schema"
+	"github.com/cloudquery/plugin-sdk/v3/transformers"
+	"github.com/pavel-snyk/snyk-sdk-go/snyk" //replace with guardian/snyk-sdk-go/snyk when released
 )
 
-func SampleTable() *schema.Table {
+func Projects() *schema.Table {
 	return &schema.Table{
-		Name:     "snyk-full-project_sample_table",
-		Resolver: fetchSampleTable,
-		Columns: []schema.Column{
-			{
-				Name: "column",
-				Type: arrow.BinaryTypes.String,
-			},
-		},
+		Name:        "snyk_projects",
+		Description: `https://snyk.docs.apiary.io/#reference/projects/all-projects/list-all-projects`,
+		Resolver:    fetchProjects,
+		Multiplex:   client.ByOrganization,
+		Transform:   transformers.TransformWithStruct(&snyk.Project{}, transformers.WithPrimaryKeys("ID")),
+		Columns:     schema.ColumnList{client.OrganizationID},
 	}
 }
 
-func fetchSampleTable(ctx context.Context, meta schema.ClientMeta, parent *schema.Resource, res chan<- any) error {
-	return fmt.Errorf("not implemented")
+func fetchProjects(ctx context.Context, meta schema.ClientMeta, _ *schema.Resource, res chan<- any) error {
+	c := meta.(*client.Client)
+
+	projects, _, err := c.Projects.List(ctx, c.OrganizationID)
+	if err != nil {
+		return err
+	}
+
+	res <- projects
+
+	return nil
 }

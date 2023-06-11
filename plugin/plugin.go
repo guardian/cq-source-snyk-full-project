@@ -17,7 +17,7 @@ func Plugin() *source.Plugin {
 		"guardian-snyk-full-project",
 		Version,
 		schema.Tables{
-			resources.SampleTable(),
+			resources.Projects(),
 		},
 		client.New,
 	)
