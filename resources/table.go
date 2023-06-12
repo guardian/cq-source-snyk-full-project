@@ -6,7 +6,7 @@ import (
 	"github.com/cloudquery/cloudquery/plugins/source/snyk/client"
 	"github.com/cloudquery/plugin-sdk/v3/schema"
 	"github.com/cloudquery/plugin-sdk/v3/transformers"
-	"github.com/pavel-snyk/snyk-sdk-go/snyk" //replace with guardian/snyk-sdk-go/snyk when released
+	"github.com/guardian/snyk-sdk-go/snyk_tables"
 )
 
 func Projects() *schema.Table {

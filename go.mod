@@ -5,13 +5,14 @@ go 1.19
 require (
 	github.com/cloudquery/plugin-pb-go v1.0.9
 	github.com/cloudquery/plugin-sdk/v3 v3.10.4
-	github.com/pavel-snyk/snyk-sdk-go v0.4.1
+	github.com/guardian/snyk-sdk-go v0.1.0
 	github.com/rs/zerolog v1.29.0
 )
 
 require (
 	github.com/apache/arrow/go/v13 v13.0.0-20230601070034-e07e22c5580a // indirect
 	github.com/julienschmidt/httprouter v1.3.0 // indirect
+	github.com/pavel-snyk/snyk-sdk-go v0.4.1 // indirect
 )
 
 replace github.com/apache/arrow/go/v13 => github.com/cloudquery/arrow/go/v13 v13.0.0-20230606001313-88d5dc2ed455
