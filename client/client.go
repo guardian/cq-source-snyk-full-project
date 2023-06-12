@@ -29,7 +29,7 @@ func New(ctx context.Context, logger zerolog.Logger, s specs.Source, opts source
 		return nil, fmt.Errorf("failed to unmarshal spec: %w", err)
 	}
 
-	client := snyk.NewClient(snykSpec.APIKey) //TODO do retries later
+	client := snyk.NewClient(snykSpec.APIKey)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create Snyk client: %w", err)
 	}

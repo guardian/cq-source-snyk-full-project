@@ -43,7 +43,7 @@ func fetchProjects(ctx context.Context, meta schema.ClientMeta, _ *schema.Resour
 				Name:                  snykProject.Name,
 				Origin:                snykProject.Origin,
 				IssueCountsBySeverity: snykProject.IssueCountsBySeverity,
-				Tags:                  snykProject.Tags, //TODO fix this
+				Tags:                  snykProject.Tags,
 				OrgID:                 orgID,
 			}
 
