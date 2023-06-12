@@ -5,22 +5,20 @@ go 1.19
 require (
 	github.com/cloudquery/plugin-pb-go v1.0.9
 	github.com/cloudquery/plugin-sdk/v3 v3.10.4
-	github.com/guardian/snyk-sdk-go v0.1.0
+	github.com/pavel-snyk/snyk-sdk-go v0.4.1
 	github.com/rs/zerolog v1.29.0
 )
 
-require (
-	github.com/apache/arrow/go/v13 v13.0.0-20230601070034-e07e22c5580a // indirect
-	github.com/julienschmidt/httprouter v1.3.0 // indirect
-	github.com/pavel-snyk/snyk-sdk-go v0.4.1 // indirect
-)
+require github.com/apache/arrow/go/v13 v13.0.0-20230601070034-e07e22c5580a // indirect
 
-replace github.com/apache/arrow/go/v13 => github.com/cloudquery/arrow/go/v13 v13.0.0-20230606001313-88d5dc2ed455
+replace (
+	github.com/apache/arrow/go/v13 => github.com/cloudquery/arrow/go/v13 v13.0.0-20230606001313-88d5dc2ed455
+	github.com/pavel-snyk/snyk-sdk-go => github.com/guardian/snyk-sdk-go v0.1.2
+)
 
 require (
 	github.com/andybalholm/brotli v1.0.5 // indirect
 	github.com/apache/thrift v0.16.0 // indirect
-	github.com/cloudquery/cloudquery/plugins/source/snyk v0.0.0-20230610180924-54bc387040a3
 	github.com/cloudquery/plugin-sdk/v2 v2.7.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/getsentry/sentry-go v0.20.0 // indirect

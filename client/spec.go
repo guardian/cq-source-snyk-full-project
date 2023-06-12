@@ -1,5 +1,5 @@
 package client
 
 type Spec struct {
-	// plugin spec goes here
+	APIKey string `json:"api_key,omitempty"`
 }
