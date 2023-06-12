@@ -7,11 +7,14 @@ import (
 	"github.com/cloudquery/plugin-pb-go/specs"
 	"github.com/cloudquery/plugin-sdk/v3/plugins/source"
 	"github.com/cloudquery/plugin-sdk/v3/schema"
+	"github.com/pavel-snyk/snyk-sdk-go/snyk"
 	"github.com/rs/zerolog"
 )
 
 type Client struct {
-	Logger zerolog.Logger
+	Logger        zerolog.Logger
+	Organisations []string
+	SnykClient    *snyk.Client
 }
 
 func (c *Client) ID() string {
@@ -20,14 +23,31 @@ func (c *Client) ID() string {
 }
 
 func New(ctx context.Context, logger zerolog.Logger, s specs.Source, opts source.Options) (schema.ClientMeta, error) {
-	var pluginSpec Spec
-
-	if err := s.UnmarshalSpec(&pluginSpec); err != nil {
-		return nil, fmt.Errorf("failed to unmarshal plugin spec: %w", err)
+	snykSpec := Spec{}
+	err := s.UnmarshalSpec(&snykSpec)
+	if err != nil {
+		return nil, fmt.Errorf("failed to unmarshal spec: %w", err)
 	}
-	// TODO: Add your client initialization here
+
+	client := snyk.NewClient(snykSpec.APIKey)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create Snyk client: %w", err)
+	}
+
+	// init orgs
+	orgs, _, err := client.Orgs.List(ctx)
+	if err != nil {
+		return nil, fmt.Errorf("failed to list Snyk orgs: %w", err)
+	}
+
+	var orgIDs []string
+	for _, org := range orgs {
+		orgIDs = append(orgIDs, org.ID)
+	}
 
 	return &Client{
-		Logger: logger,
+		Logger:        logger,
+		SnykClient:    client,
+		Organisations: orgIDs,
 	}, nil
 }
