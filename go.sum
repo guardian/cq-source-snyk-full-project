@@ -142,8 +142,6 @@ github.com/grpc-ecosystem/go-grpc-middleware/providers/zerolog/v2 v2.0.0-rc.3/go
 github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.0.0-rc.2.0.20201002093600-73cf2ae9d891/go.mod h1:GhphxcdlaRyAuBSvo6rV71BvQcvB/vuX8ugCyybuS2k=
 github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.0.0-rc.3 h1:o95KDiV/b1xdkumY5YbLR0/n2+wBxUpgf3HgfKgTyLI=
 github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.0.0-rc.3/go.mod h1:hTxjzRcX49ogbTGVJ1sM5mz5s+SSgiGIyL3jjPxl32E=
-github.com/guardian/snyk-sdk-go v0.1.0 h1:02PcaJ/y8RL9DQHKlLgFbeIVOn8M6it9+b+NCRNAdXE=
-github.com/guardian/snyk-sdk-go v0.1.0/go.mod h1:4rguBYwJp9YQBWNsmCC0ta+AQ5SBP/ZlY0XUA45wjUc=
 github.com/guardian/snyk-sdk-go v0.1.2 h1:d5j3ojN6gxmfergoIpifhDrPmFD38txKccdjZ6CBEfI=
 github.com/guardian/snyk-sdk-go v0.1.2/go.mod h1:LRL1TRuuM925gnyGp54WtS9p8S4yJMd0oS4JpLg+n7Y=
 github.com/hashicorp/golang-lru v0.5.0/go.mod h1:/m3WP610KZHVQ1SGc6re/UDhFvYD7pJ4Ao+sR/qLZy8=
@@ -469,8 +467,8 @@ google.golang.org/grpc v1.29.1/go.mod h1:itym6AZVZYACWQqET3MqgPpjcuV5QH3BxFS3Iji
 google.golang.org/grpc v1.30.0/go.mod h1:N36X2cJ7JwdamYAgDz+s+rVMFjt3numwzf/HckM8pak=
 google.golang.org/grpc v1.31.0/go.mod h1:N36X2cJ7JwdamYAgDz+s+rVMFjt3numwzf/HckM8pak=
 google.golang.org/grpc v1.37.0/go.mod h1:NREThFqKR1f3iQ6oBuvc5LadQuXVGo9rkm5ZGrQdJfM=
-google.golang.org/grpc v1.55.0 h1:3Oj82/tFSCeUrRTg/5E/7d/W5A1tj6Ky1ABAuZuv5ag=
-google.golang.org/grpc v1.55.0/go.mod h1:iYEXKGkEBhg1PjZQvoYEVPTDkHo1/bjTnfwTeGONTY8=
+google.golang.org/grpc v1.56.3 h1:8I4C0Yq1EjstUzUJzpcRVbuYA2mODtEmpWiQoN/b2nc=
+google.golang.org/grpc v1.56.3/go.mod h1:I9bI3vqKfayGqPUAwGdOSu7kt6oIJLixfffKrpXqQ9s=
 google.golang.org/grpc/examples v0.0.0-20210424002626-9572fd6faeae/go.mod h1:Ly7ZA/ARzg8fnPU9TyZIxoz33sEUuWX7txiqs8lPTgE=
 google.golang.org/protobuf v0.0.0-20200109180630-ec00e32a8dfd/go.mod h1:DFci5gLYBciE7Vtevhsrf46CRTquxDuWsQurQQe4oz8=
 google.golang.org/protobuf v0.0.0-20200221191635-4d8936d0db64/go.mod h1:kwYJMbMJ01Woi6D6+Kah6886xMZcty6N08ah7+eCXa0=
