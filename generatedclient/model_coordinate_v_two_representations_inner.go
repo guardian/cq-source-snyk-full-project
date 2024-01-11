@@ -13,7 +13,7 @@ package openapi
 import (
 	"encoding/json"
 	"fmt"
-	"bytes"
+	// "bytes"
 )
 
 // CoordinateVTwoRepresentationsInner struct for CoordinateVTwoRepresentationsInner
