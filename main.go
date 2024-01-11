@@ -20,14 +20,17 @@ func main() {
 		context.Background(),
 		openapi.ContextAPIKeys,
 		map[string]openapi.APIKey{
-			"Authorization": {Key: "API_KEY_STRING"},
+			"Authorization": {Key: "token <SNYK_API_KEY>"},
 		},
 	)
 
 	client := openapi.NewAPIClient(openapi.NewConfiguration())
 
-	x := client.ProjectsAPI.ListOrgProjects(auth, "foobar")
-	fmt.Println(x)
+	resp, http_resp, err := client.ProjectsAPI.ListOrgProjects(auth, "foobar").Version("2024-01-04").Execute()
+
+	fmt.Println(resp)
+	fmt.Println(http_resp)
+	fmt.Println(err)
 
 	// serve.Source(plugin.Plugin())
 }
