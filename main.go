@@ -24,7 +24,9 @@ func main() {
 		},
 	)
 
-	client := openapi.NewAPIClient(openapi.NewConfiguration())
+	cfg := openapi.NewConfiguration()
+	cfg.AddDefaultHeader("Authorization", "token <SNYK_API_KEY>")
+	client := openapi.NewAPIClient(cfg)
 
 	resp, http_resp, err := client.ProjectsAPI.ListOrgProjects(auth, "foobar").Version("2024-01-04").Execute()
 
