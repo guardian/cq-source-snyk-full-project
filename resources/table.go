@@ -2,19 +2,22 @@ package resources
 
 import (
 	"context"
-	"github.com/pavel-snyk/snyk-sdk-go/snyk"
+	"math"
 
 	"github.com/cloudquery/plugin-sdk/v3/schema"
 	"github.com/cloudquery/plugin-sdk/v3/transformers"
 	"github.com/guardian/cq-source-snyk-full-project/client"
+	openapi "github.com/guardian/cq-source-snyk-full-project/generatedclient"
 )
+
+type Tag = openapi.PatchProjectRequestDataAttributesTagsInner
 
 type Project struct {
 	ID                    string         `json:"id,omitempty"`
 	Name                  string         `json:"name,omitempty"`
 	Origin                string         `json:"origin,omitempty"`
 	IssueCountsBySeverity map[string]int `json:"issueCountsBySeverity,omitempty"`
-	Tags                  []snyk.Tag     `json:"tags,omitempty"`
+	Tags                  []Tag          `json:"tags,omitempty"`
 	OrgID                 string         `json:"orgId"`
 }
 
@@ -32,18 +35,18 @@ func fetchProjects(ctx context.Context, meta schema.ClientMeta, _ *schema.Resour
 	snykClient := c.SnykClient
 
 	for _, orgID := range c.Organisations {
-		snykProjects, _, err := snykClient.Projects.List(ctx, orgID)
+		snykProjects, _, err := snykClient.ProjectsAPI.ListOrgProjects(ctx, orgID).Execute()
 		if err != nil {
 			return err
 		}
 
-		for _, snykProject := range snykProjects {
+		for _, snykProject := range snykProjects.Data {
 			project := Project{
-				ID:                    snykProject.ID,
-				Name:                  snykProject.Name,
-				Origin:                snykProject.Origin,
-				IssueCountsBySeverity: snykProject.IssueCountsBySeverity,
-				Tags:                  snykProject.Tags,
+				ID:                    snykProject.Id,
+				Name:                  snykProject.Attributes.Name,
+				Origin:                snykProject.Attributes.Origin,
+				IssueCountsBySeverity: map[string]int{"critical": int(math.Round(float64(*snykProject.Meta.LatestIssueCounts.Critical))), "bar": 2},
+				Tags:                  snykProject.Attributes.Tags,
 				OrgID:                 orgID,
 			}
 

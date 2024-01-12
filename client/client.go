@@ -7,14 +7,14 @@ import (
 	"github.com/cloudquery/plugin-pb-go/specs"
 	"github.com/cloudquery/plugin-sdk/v3/plugins/source"
 	"github.com/cloudquery/plugin-sdk/v3/schema"
-	"github.com/pavel-snyk/snyk-sdk-go/snyk"
+	openapi "github.com/guardian/cq-source-snyk-full-project/generatedclient"
 	"github.com/rs/zerolog"
 )
 
 type Client struct {
 	Logger        zerolog.Logger
 	Organisations []string
-	SnykClient    *snyk.Client
+	SnykClient    *openapi.APIClient
 }
 
 func (c *Client) ID() string {
@@ -29,20 +29,23 @@ func New(ctx context.Context, logger zerolog.Logger, s specs.Source, opts source
 		return nil, fmt.Errorf("failed to unmarshal spec: %w", err)
 	}
 
-	client := snyk.NewClient(snykSpec.APIKey)
+	config := openapi.NewConfiguration()
+	config.AddDefaultHeader("Authorization", "token "+snykSpec.APIKey)
+	client := openapi.NewAPIClient(config)
+
 	if err != nil {
 		return nil, fmt.Errorf("failed to create Snyk client: %w", err)
 	}
 
 	// init orgs
-	orgs, _, err := client.Orgs.List(ctx)
+	orgs, _, err := client.OrgAPI.ListOrgs(ctx).Version("2024-01-04").Execute()
 	if err != nil {
 		return nil, fmt.Errorf("failed to list Snyk orgs: %w", err)
 	}
 
 	var orgIDs []string
-	for _, org := range orgs {
-		orgIDs = append(orgIDs, org.ID)
+	for _, org := range orgs.Data {
+		orgIDs = append(orgIDs, org.Id)
 	}
 
 	return &Client{
