@@ -1,3 +1,7 @@
+# This project is deprecated
+
+The Snyk API this project relied on no longer exists
+
 # CloudQuery snyk-full-project Source Plugin
 
 [![test](https://github.com/guardian/cq-source-snyk-full-project/actions/workflows/test.yaml/badge.svg)](https://github.com/guardian/cq-source-snyk-full-project/actions/workflows/test.yaml)
